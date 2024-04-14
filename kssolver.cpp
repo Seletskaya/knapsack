@@ -1,16 +1,8 @@
-#include <fstream>
-#include <sstream>
-#include <string>
-#include <cstdlib>
-#include <time.h>
-#include "ksparser.cpp"
+#include "kssolver.h"
 using namespace std;
 
-class Matrix{
-public:
-int **mat;
-int n,m;
-Matrix(int str = 0,int col = 0)
+
+Matrix::Matrix(int str ,int col )
 {
     this -> n = str;
     this -> m = col;
@@ -20,7 +12,7 @@ Matrix(int str = 0,int col = 0)
     }
 }
 
-void rand_matrix(int xmin,int xmax){
+void Matrix::rand_matrix(int xmin,int xmax){
 srand(time(0));
     int i,j,ind;
     for(i=0;i<n;i++){
@@ -35,7 +27,7 @@ srand(time(0));
 return;
 }
 
-void m_null(){
+void Matrix::m_null(){
     int i,j;
     for(i=0;i<n;i++){
         for(j=0;j<m;j++){
@@ -45,7 +37,7 @@ void m_null(){
     return;
 }
 
-void print_matrix(){
+void Matrix::print_matrix(){
     int i,j;
     for(i=0;i<n;i++){
         for(j=0;j<m;j++){
@@ -57,7 +49,7 @@ void print_matrix(){
 
 return;
 }
-~Matrix()
+/*~Matrix::Matrix()
 {
     for (int i = 0; i < n; i++)
     {
@@ -66,25 +58,16 @@ return;
     delete[]mat;
 }
 
-};
+*/
 
-class kssolver{
-    ksparser *el;
-    int N;
-public:
-    Matrix A();
-	int*out;
-   	kssolver(int n){
-   	    N = n;
-}
 
-kssolver(ksparser *p,int n):el(p){
+kssolver::kssolver(ksparser *p,int n):el(p){
     srand(time(0));
    	    N = n;
    	    int i,j,summv,summw;
    	    Matrix A(N,el->n+2);
    	    A.rand_matrix(0,1000);
-   	    int number = 3;
+//   	    int number = 3;
    	    int h = 0;
    	    for(i = 0;i<N;i++){
             summv = 0;
@@ -104,7 +87,7 @@ kssolver(ksparser *p,int n):el(p){
     int d1,d2;
     int k;
     int *P = new int[2];
-    while(h<20000){//main cicle
+    while(h<20000){//main cycle
    	for(i = 0;i<N;i+=2){
             for(j = 0;j<2;j++){
                     P[j]=0;
@@ -163,11 +146,11 @@ kssolver(ksparser *p,int n):el(p){
    	}
    	B.m_null();
    	h++;
-}
-out = new int [el->n+2];
-cout<<"out: "<<endl;
+    }
+    out = new int [el->n+2];
+    cout<<"out: "<<endl;
 
-int A_max = 0;
+    int A_max = 0;
     for(int t = 0;t<N;t++){
         if(A.mat[t][el->n]>A_max){
             A_max = t;
@@ -186,4 +169,3 @@ int A_max = 0;
    	return;
 }
 
-};
