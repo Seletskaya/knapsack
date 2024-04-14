@@ -3,7 +3,7 @@
 #include <sstream>
 #include <string>
 using namespace std;
-#include "kssolver.cpp"
+#include "kssolver.h"
 
 int main(){
     int i;
