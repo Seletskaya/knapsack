@@ -1,25 +1,14 @@
-#include <fstream>
-#include <sstream>
-#include <string>
-#include <cstdlib>
-#include <iostream>
+#include "ksparser.h"
 using namespace std;
 
-class ksparser {
-	string filename;
-	ifstream file;
-public:
-   	int n,k;
-    int* V;
-    int* W;
 
-ksparser(const string& s):filename (s){
+ksparser::ksparser(const string& s):filename (s){
     //cout<<"parser srart"<<endl;
     k=0;
     n=0;
 }
 
-void ksparser_f (){
+void ksparser::ksparser_f (){
   int i;
   file.open (filename);
     if(!file.is_open()){
@@ -44,23 +33,11 @@ void ksparser_f (){
       getline (file, s1);	//get W
       W[i] = stoi (s1);
     }
-    /*
-    cout<<"V:"<<endl;
-    for(i=0;i<n;i++){
-        cout<<V[i]<<" ";
-    }
-    cout<<endl;
-    cout<<"W:"<<endl;
-    for(i=0;i<n;i++){
-        cout<<W[i]<<" ";
-    }
-    cout<<endl;
-    */
   file.close();
   return;
 }
 
-~ksparser (){
+ksparser::~ksparser (){
   if (file.is_open ()){
       file.close ();
     }
@@ -68,4 +45,3 @@ void ksparser_f (){
     delete[]W;
 }
 
-};
